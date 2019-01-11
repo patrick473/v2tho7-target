@@ -1,38 +1,38 @@
 package App.model;
 
 public class department {
-    private Integer _departmentNumber;
-    private String _name;
-    private String _location;
+    private Integer departmentNumber;
+    private String name;
+    private String location;
 
     public department(Integer departmentNumber, String name, String location) {
-        this._departmentNumber = departmentNumber;
-        this._name = name;
-        this._location = location;
+        this.departmentNumber = departmentNumber;
+        this.name = name;
+        this.location = location;
     }
 
-    public Integer get_departmentnumber() {
-        return this._departmentNumber;
+    public Integer getNumber() {
+        return this.departmentNumber;
     }
 
-    public void set_departmentnumber(Integer _departmentNumber) {
-        this._departmentNumber = _departmentNumber;
+    public void setNumber(Integer departmentNumber) {
+        this.departmentNumber = departmentNumber;
     }
 
-    public String get_name() {
-        return this._name;
+    public String getName() {
+        return this.name;
     }
 
-    public void set_name(String _name) {
-        this._name = _name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String get_location() {
-        return this._location;
+    public String getLocation() {
+        return this.location;
     }
 
-    public void set_location(String _location) {
-        this._location = _location;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
 }
