@@ -12,10 +12,11 @@ public class employee {
     private String email;
     private String sex;
     private String jobTitle;
-    private String department;
+    private Integer department;
 
     public employee(Integer employeeNumber, String firstName, String lastName, String ssn, String birthDate,
-            String address, String city, String country, String email, String sex, String jobTitle, String department) {
+            String address, String city, String country, String email, String sex, String jobTitle,
+            Integer department) {
         this.employeeNumber = employeeNumber;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -118,11 +119,11 @@ public class employee {
         this.jobTitle = jobTitle;
     }
 
-    public String getDepartment() {
+    public Integer getDepartment() {
         return this.department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Integer department) {
         this.department = department;
     }
 }
