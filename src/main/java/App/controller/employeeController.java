@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class employeeController {
-    @RequestMapping("/")
+    @RequestMapping(value="/employee")
     public String index() {
         return "test test this is employee endpoint";
     }

@@ -7,7 +7,9 @@ public class departmentService {
     private departmentDAO dao;
 
     public void insertDepartment(department dep) {
-        dao.insertDepartment(dep);
+        // only call when implemented
+        // dao.insertDepartment(dep);
+        System.out.print(dep);
     }
 
 }

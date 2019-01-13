@@ -35,4 +35,7 @@ public class department {
         this.location = location;
     }
 
+    public String toString(){
+        return this.name + "" + this.location + " " + this.departmentNumber;
+    }
 }

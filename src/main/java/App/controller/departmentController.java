@@ -14,7 +14,7 @@ import App.model.department;
 public class departmentController {
     private departmentService service = new departmentService();
 
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    @RequestMapping(value = "/test", method = RequestMethod.POST , consumes = "application/json", produces = "application/json")
     public ResponseEntity<department> insert(@RequestBody department dep) {
 
         if (dep != null) {

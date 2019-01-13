@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class projectController {
 
-    @RequestMapping("/")
+    @RequestMapping(value="/project")
     public String index() {
         return "test test this is project endpoint";
     }
