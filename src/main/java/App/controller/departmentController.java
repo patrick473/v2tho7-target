@@ -3,8 +3,12 @@ package App.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import App.service.departmentService;
@@ -14,7 +18,7 @@ import App.model.department;
 public class departmentController {
     private departmentService service = new departmentService();
 
-    @RequestMapping(value = "/test", method = RequestMethod.POST , consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/test", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<department> insert(@RequestBody department dep) {
 
         if (dep != null) {
@@ -23,4 +27,21 @@ public class departmentController {
 
         return new ResponseEntity<department>(dep, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/department/{id}", method = RequestMethod.GET, produces = "application/json")
+    public String getType(@PathVariable("id") Integer id) {
+
+        String result = "";
+        ObjectMapper mapper = new ObjectMapper();
+        department dep = service.getDepartment(id);
+        try {
+            result = mapper.writeValueAsString(dep);
+
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+
+        return result;
+    }
+
 }
