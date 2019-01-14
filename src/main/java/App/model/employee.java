@@ -31,6 +31,9 @@ public class employee {
         this.department = department;
     }
 
+    public employee() {
+    }
+
     public Integer getEmployeenumber() {
         return this.employeeNumber;
     }

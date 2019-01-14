@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.http.HttpStatus;
@@ -29,11 +31,27 @@ public class departmentController {
     }
 
     @RequestMapping(value = "/department/{id}", method = RequestMethod.GET, produces = "application/json")
-    public String getType(@PathVariable("id") Integer id) {
+    public String getDepartment(@PathVariable("id") Integer id) {
 
         String result = "";
         ObjectMapper mapper = new ObjectMapper();
         department dep = service.getDepartment(id);
+        try {
+            result = mapper.writeValueAsString(dep);
+
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/department", method = RequestMethod.GET, produces = "application/json")
+    public String getAllDepartments() {
+
+        String result = "";
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayList<department> dep = service.getAllDepartments();
         try {
             result = mapper.writeValueAsString(dep);
 

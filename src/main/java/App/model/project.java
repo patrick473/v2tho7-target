@@ -5,10 +5,13 @@ public class project {
     private Integer projectNumber;
     private String location;
 
-    public project(String name, Integer projectNumber, String location) {
+    public project(Integer projectNumber, String name, String location) {
         this.name = name;
         this.projectNumber = projectNumber;
         this.location = location;
+    }
+
+    public project() {
     }
 
     public String getName() {

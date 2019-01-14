@@ -2,11 +2,15 @@ package App.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 import App.model.employee;
 
 public class employeeDAO extends baseDAO {
 
-    public void insertDepartment(employee emp) {
+    public void insertEmployee(employee emp) {
 
         try (Connection con = super.getConnection()) {
 
@@ -29,5 +33,69 @@ public class employeeDAO extends baseDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public employee getEmployee(Integer id) {
+        employee emp = new employee();
+        try (Connection con = super.getConnection()) {
+
+            String query = "SELECT * FROM Employee WHERE employeeID = " + id;
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            Integer employeeID = rs.getInt("employeeID");
+            String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+            String ssn = rs.getString("ssn");
+            String birthdate = rs.getString("birthdate");
+            String address = rs.getString("address");
+            String city = rs.getString("city");
+            String country = rs.getString("country");
+            String email = rs.getString("email");
+            // if error is generated wrong datatype this is probally the culprit
+            String sex = rs.getString("sex");
+            String jobTitle = rs.getString("jobTitle");
+            Integer department = rs.getInt("department");
+
+            emp = new employee(employeeID, firstname, lastname, ssn, birthdate, address, city, country, email, sex,
+                    jobTitle, department);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return emp;
+    }
+
+    public ArrayList<employee> getAllEmployees() {
+        ArrayList<employee> emp = new ArrayList<employee>();
+        try (Connection con = super.getConnection()) {
+
+            String query = "SELECT * FROM Employee";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                Integer employeeID = rs.getInt("employeeID");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
+                String ssn = rs.getString("ssn");
+                String birthdate = rs.getString("birthdate");
+                String address = rs.getString("address");
+                String city = rs.getString("city");
+                String country = rs.getString("country");
+                String email = rs.getString("email");
+                // if error is generated wrong datatype this is probally the culprit
+                String sex = rs.getString("sex");
+                String jobTitle = rs.getString("jobTitle");
+                Integer department = rs.getInt("department");
+                employee object = new employee(employeeID, firstname, lastname, ssn, birthdate, address, city, country,
+                        email, sex, jobTitle, department);
+                emp.add(object);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return emp;
     }
 }
