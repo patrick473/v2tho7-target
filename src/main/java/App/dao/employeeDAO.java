@@ -35,6 +35,43 @@ public class employeeDAO extends baseDAO {
         }
     }
 
+    public void updateEmployee(employee emp) {
+
+        try (Connection con = super.getConnection()) {
+
+            String updateString = "UPDATE Employee SET firstname = ?, lastname = ?, ssn = ?, birthdate = ?, address = ?, city = ?, country = ?, email = ?, sex = ?, jobTitle = ?, department = ?";
+            PreparedStatement updateEmployee = con.prepareStatement(updateString);
+            updateEmployee.setString(1, emp.getFirstname());
+            updateEmployee.setString(2, emp.getLastname());
+            updateEmployee.setString(3, emp.getSsn());
+            updateEmployee.setString(4, emp.getBirthdate());
+            updateEmployee.setString(5, emp.getAddress());
+            updateEmployee.setString(6, emp.getCity());
+            updateEmployee.setString(7, emp.getCountry());
+            updateEmployee.setString(8, emp.getEmail());
+            // if error is generated wrong datatype this is probally the culprit
+            updateEmployee.setString(9, emp.getSex());
+            updateEmployee.setString(10, emp.getJobtitle());
+            updateEmployee.setInt(11, emp.getDepartment());
+            updateEmployee.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteEmployee(Integer id) {
+        try (Connection con = super.getConnection()) {
+            String deleteString = "DELETE FROM Employee WHERE employeeID = ?";
+            PreparedStatement deleteEmployee = con.prepareStatement(deleteString);
+            deleteEmployee.setInt(1, id);
+
+            deleteEmployee.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public employee getEmployee(Integer id) {
         employee emp = new employee();
         try (Connection con = super.getConnection()) {

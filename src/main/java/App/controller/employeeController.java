@@ -19,7 +19,29 @@ import App.service.employeeService;
 public class employeeController {
     private employeeService service = new employeeService();
 
-    @RequestMapping(value = "/test", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/change_employee", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<employee> update(@RequestBody employee dep) {
+
+        if (dep != null) {
+            service.updateEmployee(dep);
+        }
+
+        return new ResponseEntity<employee>(dep, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/remove_employee/{id}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<employee> delete(@PathVariable("id") Integer id) {
+        employee dep = service.getEmployee(id);
+        if (dep == null) {
+            System.out.println("Unable to delete. employee with id " + id + " not found");
+            return new ResponseEntity<employee>(HttpStatus.NOT_FOUND);
+        }
+
+        service.deleteEmployee(id);
+        return new ResponseEntity<employee>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value = "/new_employee", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<employee> insert(@RequestBody employee emp) {
 
         if (emp != null) {

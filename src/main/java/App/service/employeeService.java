@@ -9,9 +9,7 @@ public class employeeService {
     private employeeDAO dao;
 
     public void insertEmployee(employee emp) {
-        // only call when implemented
-        // dao.insertEmployee(emp);
-        System.out.print(emp);
+        dao.insertEmployee(emp);
     }
 
     public employee getEmployee(Integer id) {
@@ -20,6 +18,14 @@ public class employeeService {
 
     public ArrayList<employee> getAllEmployees() {
         return dao.getAllEmployees();
+    }
+
+    public void deleteEmployee(Integer id) {
+        dao.deleteEmployee(id);
+    }
+
+    public void updateEmployee(employee emp) {
+        dao.updateEmployee(emp);
     }
 
 }
