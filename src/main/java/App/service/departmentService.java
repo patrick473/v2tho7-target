@@ -9,9 +9,7 @@ public class departmentService {
     private departmentDAO dao;
 
     public void insertDepartment(department dep) {
-        // only call when implemented
-        // dao.insertDepartment(dep);
-        System.out.print(dep);
+        dao.insertDepartment(dep);
     }
 
     public department getDepartment(Integer id) {
@@ -20,6 +18,14 @@ public class departmentService {
 
     public ArrayList<department> getAllDepartments() {
         return dao.getAllDepartments();
+    }
+
+    public void updateDepartment(department dep) {
+        dao.updateDepartment(dep);
+    }
+
+    public void deleteDepartment(Integer id) {
+        dao.deleteDepartment(id);
     }
 
 }

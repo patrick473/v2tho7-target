@@ -20,7 +20,7 @@ import App.model.department;
 public class departmentController {
     private departmentService service = new departmentService();
 
-    @RequestMapping(value = "/test", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/new_department", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<department> insert(@RequestBody department dep) {
 
         if (dep != null) {
@@ -28,6 +28,28 @@ public class departmentController {
         }
 
         return new ResponseEntity<department>(dep, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/change_department", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<department> update(@RequestBody department dep) {
+
+        if (dep != null) {
+            service.updateDepartment(dep);
+        }
+
+        return new ResponseEntity<department>(dep, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/remove_department/{id}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<department> delete(@PathVariable("id") Integer id) {
+        department dep = service.getDepartment(id);
+        if (dep == null) {
+            System.out.println("Unable to delete. Department with id " + id + " not found");
+            return new ResponseEntity<department>(HttpStatus.NOT_FOUND);
+        }
+
+        service.deleteDepartment(id);
+        return new ResponseEntity<department>(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(value = "/department/{id}", method = RequestMethod.GET, produces = "application/json")
