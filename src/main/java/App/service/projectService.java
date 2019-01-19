@@ -20,4 +20,12 @@ public class projectService {
         return dao.getAllprojects();
     }
 
+    public void updateProject(project proj) {
+        dao.updateProject(proj);
+    }
+
+    public void deleteProject(Integer id) {
+        dao.deleteProject(id);
+    }
+
 }

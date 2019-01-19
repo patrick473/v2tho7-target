@@ -25,6 +25,35 @@ public class projectDAO extends baseDAO {
         }
     }
 
+    public void updateProject(project proj) {
+
+        try (Connection con = super.getConnection()) {
+            String updateString = "UPDATE project SET name = ?, location = ? WHERE projectID = ?";
+            PreparedStatement updateProject = con.prepareStatement(updateString);
+            updateProject.setString(1, proj.getName());
+            updateProject.setString(2, proj.getLocation());
+            updateProject.setInt(3, proj.getProjectnumber());
+
+            updateProject.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteProject(Integer id) {
+
+        try (Connection con = super.getConnection()) {
+            String deleteString = "DELETE FROM project WHERE projectID = ?";
+            PreparedStatement deleteProject = con.prepareStatement(deleteString);
+            deleteProject.setInt(1, id);
+
+            deleteProject.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public project getProject(Integer id) {
         project proj = new project();
         try (Connection con = super.getConnection()) {

@@ -20,13 +20,16 @@ public class employeeController {
     private employeeService service = new employeeService();
 
     @RequestMapping(value = "/change_employee", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public ResponseEntity<employee> update(@RequestBody employee dep) {
+    public ResponseEntity<employee> update(@RequestBody employee emp) {
 
-        if (dep != null) {
-            service.updateEmployee(dep);
+        employee exist = service.getEmployee(emp.getEmployeenumber());
+        if (exist == null) {
+            System.out.println("Unable to update. employee with id " + emp.getEmployeenumber() + " not found");
+            return new ResponseEntity<employee>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<employee>(dep, HttpStatus.OK);
+        service.updateEmployee(emp);
+        return new ResponseEntity<employee>(emp, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/remove_employee/{id}", method = RequestMethod.GET, produces = "application/json")

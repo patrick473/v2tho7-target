@@ -32,11 +32,13 @@ public class departmentController {
 
     @RequestMapping(value = "/change_department", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<department> update(@RequestBody department dep) {
-
-        if (dep != null) {
-            service.updateDepartment(dep);
+        department exist = service.getDepartment(dep.getNumber());
+        if (exist == null) {
+            System.out.println("Unable to update. department with id " + dep.getNumber() + " not found");
+            return new ResponseEntity<department>(HttpStatus.NOT_FOUND);
         }
 
+        service.updateDepartment(dep);
         return new ResponseEntity<department>(dep, HttpStatus.OK);
     }
 
