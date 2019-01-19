@@ -4,6 +4,13 @@
             "type": "java",
             "name": "CodeLens (Launch) - DemoApplication",
             "request": "launch",
+            "mainClass": "App.DemoApplication",
+            "projectName": "tosad"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - DemoApplication",
+            "request": "launch",
             "mainClass": "com.target.tosad.DemoApplication"
         }
     ]
